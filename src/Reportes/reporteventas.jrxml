@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="58c40fa4-c1c4-4c12-999a-6f87e3ffad8a">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     cotizacion.`ID_COTIZACION` AS cotizacion_ID_COTIZACION,
+     cotizacion.`ID_VENTA` AS cotizacion_ID_VENTA,
+     cotizacion.`ID_CLIENTE` AS cotizacion_ID_CLIENTE,
+     cotizacion.`TOTAL_COTIZACION` AS cotizacion_TOTAL_COTIZACION,
+     cotizacion.`FECHA_COTIZACION` AS cotizacion_FECHA_COTIZACION,
+     cotizacion.`ESTADO_COTIZACION` AS cotizacion_ESTADO_COTIZACION,
+     cliente.`ID_CLIENTE` AS cliente_ID_CLIENTE,
+     cliente.`RUT_CLIENTE` AS cliente_RUT_CLIENTE,
+     cliente.`NOMBRE_CLIENTE` AS cliente_NOMBRE_CLIENTE,
+     cliente.`DIRECCION_CLIENTE` AS cliente_DIRECCION_CLIENTE,
+     cliente.`EMPRESA_CLIENTE` AS cliente_EMPRESA_CLIENTE,
+     cliente.`TELEFONO_CLIENTE` AS cliente_TELEFONO_CLIENTE,
+     cliente.`MAIL_CLIENTE` AS cliente_MAIL_CLIENTE,
+     cliente.`TIPO_CLIENTE` AS cliente_TIPO_CLIENTE
+FROM
+     `cliente` cliente INNER JOIN `cotizacion` cotizacion ON cliente.`ID_CLIENTE` = cotizacion.`ID_CLIENTE`]]>
+	</queryString>
+	<field name="cliente_NOMBRE_CLIENTE" class="java.lang.String"/>
+	<field name="cotizacion_TOTAL_COTIZACION" class="java.lang.Integer"/>
+	<field name="cliente_DIRECCION_CLIENTE" class="java.lang.String"/>
+	<field name="cliente_RUT_CLIENTE" class="java.lang.String"/>
+	<field name="cliente_EMPRESA_CLIENTE" class="java.lang.String"/>
+	<field name="cliente_TELEFONO_CLIENTE" class="java.math.BigDecimal"/>
+	<field name="cotizacion_ID_COTIZACION" class="java.lang.Integer"/>
+	<field name="cotizacion_FECHA_COTIZACION" class="java.sql.Timestamp"/>
+	<group name="cliente_NOMBRE_CLIENTE">
+		<groupExpression><![CDATA[$F{cliente_NOMBRE_CLIENTE}]]></groupExpression>
+		<groupHeader>
+			<band height="6"/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement uuid="f9c15183-30c4-49f8-9375-cdc7cab7c094" mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#000033"/>
+				<staticText>
+					<reportElement uuid="5825d592-0596-492c-8c0c-44b3f69c45b0" x="20" y="20" width="234" height="43" forecolor="#FFFFFF"/>
+					<textElement>
+						<font fontName="Rod" size="24" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Ventas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="76b7f117-6ca2-4395-83ab-49863609b39d" x="395" y="43" width="180" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Easystem V1.0]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement uuid="ce921bdf-fa66-4c06-a0fd-0fea441ad59d" x="-20" y="20" width="595" height="1" forecolor="#666666"/>
+			</line>
+			<staticText>
+				<reportElement uuid="d769e5ef-2ad8-4cb7-830b-4892afa6026d" mode="Opaque" x="395" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a634ae4d-c9b2-4ab9-9664-0f7535933e05" mode="Opaque" x="25" y="0" width="133" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2e610168-e65a-4989-8e59-3c83be9bae3e" mode="Opaque" x="237" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="eedff783-712e-4406-92dd-0a89bff3c301" mode="Opaque" x="316" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2ddebef8-7bb6-4758-8ca8-6f1e04ef465f" mode="Opaque" x="0" y="0" width="25" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e172c37c-7244-4097-9e27-e4e0253142e9" mode="Opaque" x="474" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="18687680-b417-413f-bfc4-c78270a4336e" mode="Opaque" x="158" y="0" width="79" height="20" forecolor="#006699" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rut]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25">
+			<line>
+				<reportElement uuid="99def838-8bdf-4820-ba12-c932d3a79657" positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="be13e39a-cfdf-4edc-8211-024747e42a21" x="25" y="0" width="133" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_NOMBRE_CLIENTE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="69631dd1-db69-4184-a7d4-c8f99835f6de" x="158" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_RUT_CLIENTE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="15bc4122-1283-4983-b862-b3957a6ddbd9" x="237" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_EMPRESA_CLIENTE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="8e1b49c3-0025-4dae-807d-7a49affaf147" x="316" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente_TELEFONO_CLIENTE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="c8bb5e5c-9292-41c6-b773-a8b4a1fd7513" x="0" y="0" width="25" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cotizacion_ID_COTIZACION}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="421cb85b-e94c-4b35-aba9-41d38b374ec1" x="476" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cotizacion_FECHA_COTIZACION}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="¤ #,##0">
+				<reportElement uuid="a7fd95ed-2d36-43ea-ba4d-6676cdd3072e" x="395" y="-1" width="79" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cotizacion_TOTAL_COTIZACION}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement uuid="b4137c58-26a3-4a1b-8fb9-c3718d0e4968" mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="d54415a3-6681-44c6-b0e3-9f8c26f13ab1" mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="118d2a91-59f4-4799-99db-848b4d6fd782" x="0" y="4" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

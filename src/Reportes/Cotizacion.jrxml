@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e8e42ca1-0446-4947-94d8-7d45320ffd89">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="55ca52a0-d4b7-4d41-8a2c-da88fd115142"/>
+	<subDataset name="dataset1" uuid="e151132c-bf4b-427e-9e30-348af0857a64"/>
+	<subDataset name="dataset2" uuid="abbc7847-9cc8-4f43-801c-e31bec17f19b"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<frame>
+				<reportElement uuid="cb180b0e-9199-4029-8db1-876f8f6599ef" mode="Opaque" x="0" y="0" width="555" height="24" backcolor="#000000"/>
+			</frame>
+			<staticText>
+				<reportElement uuid="6844a3eb-24ec-4400-8e13-172e32c54aea" x="0" y="24" width="173" height="55"/>
+				<textElement verticalAlignment="Middle">
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[Cotizacion N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7edc5e85-ae14-4487-a4ae-97ead7bfdd5e" x="173" y="24" width="102" height="55"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30"/>
+				</textElement>
+				<text><![CDATA[113]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="491b3fdc-4b51-4812-9a68-73a59996c1cd" x="411" y="4" width="144" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<frame>
+				<reportElement uuid="cb180b0e-9199-4029-8db1-876f8f6599ef" mode="Opaque" x="0" y="0" width="555" height="35" backcolor="#000000"/>
+				<staticText>
+					<reportElement uuid="e941243c-284b-4b32-ba02-e6ea4c188085" x="352" y="0" width="203" height="35" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center">
+						<font size="18"/>
+					</textElement>
+					<text><![CDATA[Easystem V1.0]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="89" splitType="Stretch">
+			<crosstab>
+				<reportElement uuid="d4534c45-a731-4cc7-9154-6429acb4588f" x="0" y="0" width="555" height="78"/>
+				<crosstabDataset>
+					<dataset>
+						<datasetRun subDataset="Table Dataset 1" uuid="d38eb2ae-d237-402f-99b8-de6e58547725">
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+					</dataset>
+				</crosstabDataset>
+				<crosstabHeaderCell>
+					<cellContents>
+						<staticText>
+							<reportElement uuid="ef794279-7c8e-4d2c-a035-c1f8c5c40524" style="Crosstab Data Text" x="0" y="0" width="142" height="30"/>
+							<textElement>
+								<font size="14" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Nombre]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="REPORT_CONTEXT" width="142" totalPosition="End">
+					<bucket class="net.sf.jasperreports.engine.ReportContext">
+						<bucketExpression><![CDATA[$P{REPORT_CONTEXT}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement uuid="3541e315-6813-4555-856f-add91ff3b743" style="Crosstab Data Text" x="0" y="0" width="142" height="25"/>
+								<textElement>
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Direccion]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement uuid="431e2d0c-dca5-4aa3-a54d-fa5038e0b1c0" style="Crosstab Data Text" x="0" y="0" width="142" height="25"/>
+								<textElement>
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Teléfono]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="REPORT_CONTEXT1" height="30" totalPosition="End">
+					<bucket class="net.sf.jasperreports.engine.ReportContext">
+						<bucketExpression><![CDATA[$P{REPORT_CONTEXT}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement uuid="032ff6c9-5ee4-40a3-84fd-fd5830adf7ef" style="Crosstab Data Text" x="0" y="0" width="405" height="30"/>
+								<textElement>
+									<font size="14"/>
+								</textElement>
+								<text><![CDATA[Julio Andrés Benavides Saavedra]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="REPORT_CONTEXTMeasure" class="java.lang.Integer" calculation="Count">
+					<measureExpression><![CDATA[$P{REPORT_CONTEXT}]]></measureExpression>
+				</measure>
+				<crosstabCell width="413" height="25">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<staticText>
+							<reportElement uuid="232216d5-53e9-434c-b750-c33a7501d906" style="Crosstab Data Text" x="0" y="0" width="405" height="25"/>
+							<textElement>
+								<font size="14"/>
+							</textElement>
+							<text><![CDATA[Pasaje Las Garzas 540, San Pedro de la Paz]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="413" height="25" rowTotalGroup="REPORT_CONTEXT">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<staticText>
+							<reportElement uuid="7c2e07f2-af48-46cc-8455-3933803df97f" style="Crosstab Data Text" x="0" y="0" width="405" height="25"/>
+							<textElement>
+								<font size="14"/>
+							</textElement>
+							<text><![CDATA[78761099]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="0" height="25" columnTotalGroup="REPORT_CONTEXT1">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="0" rowTotalGroup="REPORT_CONTEXT" columnTotalGroup="REPORT_CONTEXT1">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<crosstab>
+				<reportElement uuid="a00d656a-cb16-4f16-8b61-1604d4e6b957" x="0" y="0" width="555" height="125"/>
+				<crosstabHeaderCell>
+					<cellContents>
+						<staticText>
+							<reportElement uuid="38ab66fe-042c-4cc5-8bd1-9a16f24f22c1" style="Crosstab Data Text" x="0" y="0" width="127" height="30"/>
+							<textElement>
+								<font size="18"/>
+							</textElement>
+							<text><![CDATA[Cantidad]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabHeaderCell>
+				<rowGroup name="REPORT_CONTEXT" width="127" totalPosition="End">
+					<bucket class="net.sf.jasperreports.engine.ReportContext">
+						<bucketExpression><![CDATA[$P{REPORT_CONTEXT}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement uuid="14ed3eab-b466-47c5-89e6-7fc0134b8a01" style="Crosstab Data Text" x="0" y="0" width="127" height="25"/>
+								<textElement verticalAlignment="Middle"/>
+								<text><![CDATA[150]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement uuid="ec455260-85ed-4451-8006-d6abda86fed1" style="Crosstab Data Text" x="0" y="0" width="127" height="25"/>
+								<textElement verticalAlignment="Middle"/>
+								<text><![CDATA[300]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="REPORT_CONTEXT1" height="30" totalPosition="End">
+					<bucket class="net.sf.jasperreports.engine.ReportContext">
+						<bucketExpression><![CDATA[$P{REPORT_CONTEXT}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#F0F8FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement uuid="2592d8fe-ba5e-42df-a70c-3b2ad0aa3911" style="Crosstab Data Text" x="0" y="0" width="276" height="30"/>
+								<textElement>
+									<font size="16" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Articulo]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents backcolor="#BFE1FF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement uuid="84216adc-603c-4f12-8c71-a6cc03e5116b" style="Crosstab Data Text" x="0" y="0" width="134" height="30"/>
+								<textElement>
+									<font size="18"/>
+								</textElement>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="REPORT_CONTEXTMeasure" class="java.lang.Integer" calculation="Count">
+					<measureExpression><![CDATA[$P{REPORT_CONTEXT}]]></measureExpression>
+				</measure>
+				<crosstabCell width="276" height="25">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<staticText>
+							<reportElement uuid="9eac82f6-8c8a-41cb-88c6-f2c4eb1fab5b" style="Crosstab Data Text" x="0" y="0" width="276" height="25"/>
+							<textElement verticalAlignment="Middle"/>
+							<text><![CDATA[Empanadas Queso Macha]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="276" height="25" rowTotalGroup="REPORT_CONTEXT">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<staticText>
+							<reportElement uuid="00064b3a-9e07-4b0d-b5a9-3312d764eb8c" style="Crosstab Data Text" x="0" y="0" width="276" height="25"/>
+							<textElement verticalAlignment="Middle"/>
+							<text><![CDATA[Petit Bouche (Frutilla, Durazno, Piña)]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="151" columnTotalGroup="REPORT_CONTEXT1">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<staticText>
+							<reportElement uuid="69b14f7f-0501-4b5f-8658-0cfdb582b6e9" style="Crosstab Data Text" x="0" y="0" width="134" height="25"/>
+							<textElement verticalAlignment="Middle"/>
+							<text><![CDATA[$112.500]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="151" rowTotalGroup="REPORT_CONTEXT" columnTotalGroup="REPORT_CONTEXT1">
+					<cellContents backcolor="#BFE1FF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<staticText>
+							<reportElement uuid="31799de0-693b-48c0-9160-d9e901d5904c" style="Crosstab Data Text" x="0" y="0" width="134" height="25"/>
+							<textElement verticalAlignment="Middle"/>
+							<text><![CDATA[$120.000]]></text>
+						</staticText>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+			<staticText>
+				<reportElement uuid="fac4b28b-bf93-4cc1-895b-0509a031f9d2" x="311" y="105" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3d6686f3-cbcd-45fc-afbc-45fb8791ff57" x="411" y="105" width="144" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[$232.500]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement uuid="da7adc2d-9d3b-4b58-937c-91431d5ef19f" x="455" y="22" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="085a63e1-de48-41a9-bb13-7bf671b286b0" x="0" y="22" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="f71e9ada-df1b-4c3f-9a02-49e92232dcc8" x="80" y="22" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="dc30e7ab-4121-49c9-b015-a24f059dbc05" x="240" y="22" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

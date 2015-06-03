@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reporte Stock" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ee5ef96e-725e-4898-8545-29de1e426552">
+	<property name="ireport.zoom" value="1.331000000000003"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     insumos.`ID_INSUMO` AS insumos_ID_INSUMO,
+     insumos.`NOMBRE_INSUMO` AS insumos_NOMBRE_INSUMO,
+     insumos.`UNIDADMEDIDA_INSUMO` AS insumos_UNIDADMEDIDA_INSUMO,
+     insumos.`PRECIO_INSUMO` AS insumos_PRECIO_INSUMO,
+     insumos.`CANTIDAD_INSUMO` AS insumos_CANTIDAD_INSUMO
+FROM
+     `insumos` insumos]]>
+	</queryString>
+	<field name="insumos_ID_INSUMO" class="java.lang.Integer"/>
+	<field name="insumos_NOMBRE_INSUMO" class="java.lang.String"/>
+	<field name="insumos_UNIDADMEDIDA_INSUMO" class="java.lang.Integer"/>
+	<field name="insumos_PRECIO_INSUMO" class="java.math.BigDecimal"/>
+	<field name="insumos_CANTIDAD_INSUMO" class="java.math.BigDecimal"/>
+	<group name="insumos_ID_INSUMO">
+		<groupExpression><![CDATA[$F{insumos_ID_INSUMO}]]></groupExpression>
+		<groupHeader>
+			<band height="6"/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement uuid="9b194b61-78f6-4fbe-a7d2-e86558e7a997" mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#000033"/>
+				<staticText>
+					<reportElement uuid="09cf6424-3eab-4d29-ba74-9008fa8f285b" x="20" y="20" width="234" height="43" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Rod" size="24" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Stock]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0c3b8395-225d-4d8c-a474-5817fab7291c" x="395" y="43" width="180" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Easystem v1.0]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement uuid="d3a305ee-83f5-4662-96f9-afa80a335b3c" x="-20" y="20" width="595" height="1" forecolor="#666666"/>
+			</line>
+			<staticText>
+				<reportElement uuid="1dcbe909-9684-4ddf-8f83-94ba3a4fa98e" mode="Opaque" x="20" y="0" width="151" height="20" forecolor="#000033" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4896fc09-1057-4eef-9d5f-ba884bfb7e29" mode="Opaque" x="171" y="0" width="138" height="20" forecolor="#000033" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidad Medida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a36550b0-f6b0-485a-aa49-7eaea26dc6e8" mode="Opaque" x="309" y="0" width="138" height="20" forecolor="#000033" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4bed3408-91d3-437e-b47b-0f90292ed6aa" mode="Opaque" x="447" y="0" width="128" height="20" forecolor="#000033" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="e0638953-be35-48ed-90df-396bbee54dd6" x="20" y="0" width="151" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{insumos_NOMBRE_INSUMO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="61853428-7c44-4d68-8034-0f83fa149971" x="171" y="0" width="138" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{insumos_UNIDADMEDIDA_INSUMO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="1507f985-f67d-4b2e-a65e-8b8c9c53bcb8" x="309" y="0" width="138" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{insumos_PRECIO_INSUMO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="ba91f2ec-04a0-4e28-8a32-f4c560dbc04f" x="447" y="0" width="128" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{insumos_CANTIDAD_INSUMO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement uuid="20165e3b-572f-41dd-8f89-02e22c7821e6" mode="Opaque" x="0" y="4" width="515" height="13" forecolor="#FFFFFF" backcolor="#000033"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="4356366b-b2d8-4cca-9688-1458bd7688a3" mode="Opaque" x="515" y="4" width="40" height="13" forecolor="#FFFFFF" backcolor="#000033"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="5b1de020-57f9-4be4-b5e8-b44510a860b9" mode="Transparent" x="0" y="4" width="100" height="13" forecolor="#FFFFFF"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
