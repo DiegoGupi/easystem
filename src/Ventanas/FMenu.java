@@ -18,16 +18,19 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Nigga
  */
 public final class FMenu extends javax.swing.JFrame {
+    
+        private static FMenu instancia;
 
     /**
      * Creates new form FMenu
+     *
      * @throws java.text.ParseException
      */
     public FMenu() throws ParseException {
-                  try {
-         UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
-         } catch (UnsupportedLookAndFeelException e) {
-         }
+        try {
+            UIManager.setLookAndFeel(new SyntheticaBlackStarLookAndFeel());
+        } catch (UnsupportedLookAndFeelException e) {
+        }
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -38,6 +41,12 @@ public final class FMenu extends javax.swing.JFrame {
         bt_usuarios.setToolTipText("Agrega o edita usuarios del sistema");
         bt_ventas.setToolTipText("Permite al usuario acceder al modulo Ventas para registrar un nuevo movimiento");
 
+    }
+    public static FMenu getInstancia() throws ParseException {
+        if (instancia == null) {
+            instancia = new FMenu();
+        }
+        return instancia;
     }
 
     /**
@@ -64,6 +73,8 @@ public final class FMenu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        lblusr = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -161,6 +172,12 @@ public final class FMenu extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Salir del Sistema");
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("USUARIO CONECTADO");
+
+        lblusr.setForeground(new java.awt.Color(255, 255, 255));
+        lblusr.setText("jLabel9");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -170,12 +187,18 @@ public final class FMenu extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addComponent(lblusr, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblusr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
@@ -370,7 +393,9 @@ public final class FMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    public javax.swing.JLabel lblusr;
     // End of variables declaration//GEN-END:variables
 }
