@@ -41,7 +41,7 @@ public final class Conexion_MySQL extends Conexion{
                                            java.lang.InstantiationException,
                                            java.lang.IllegalAccessException,
                                            java.sql.SQLException{
-        this("facilitator", "root", "");
+        this("easystem", "root", "");
     }
     
     public void initdb() throws java.lang.ClassNotFoundException,
