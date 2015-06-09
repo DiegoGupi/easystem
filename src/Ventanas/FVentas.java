@@ -7,7 +7,6 @@ package Ventanas;
 import Clases.Cliente;
 import Clases.Insumos;
 import Clases.Producto;
-import Clases.carrito;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -17,12 +16,10 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import mondrian.olap.Category;
 
 /**
  *
@@ -355,11 +352,6 @@ public class FVentas extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Cantidad");
 
-        tf_filtroProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_filtroProductoActionPerformed(evt);
-            }
-        });
         tf_filtroProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tf_filtroProductoKeyPressed(evt);
@@ -572,7 +564,6 @@ public class FVentas extends javax.swing.JFrame {
         });
 
         jPanel4.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel4.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -626,12 +617,12 @@ public class FVentas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel15)
                 .addGap(276, 276, 276)
-                .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(154, 154, 154)
+                .addComponent(jlabel_fecha1, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlabel_fecha1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                .addGap(2, 2, 2)
                 .addComponent(jLabel17)
-                .addGap(18, 18, 18)
+                .addGap(64, 64, 64)
                 .addComponent(jlabel_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -639,13 +630,13 @@ public class FVentas extends javax.swing.JFrame {
             .addComponent(btn_volver2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jlabel_fecha1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jlabel_fecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+            .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel15)))
+                        .addComponent(jLabel15))
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -707,17 +698,21 @@ public class FVentas extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_nuevoClienteActionPerformed
 
     private void bt_agregarCotizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_agregarCotizacionActionPerformed
-
-        try {
-            cargarinsumosporproducto();
-        } catch (SQLException ex) {
-            Logger.getLogger(FVentas.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(FVentas.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FVentas.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(FVentas.class.getName()).log(Level.SEVERE, null, ex);
+        if (this.tf_cantidadCotizacion.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese un dato en cantidad");
+            tf_cantidadCotizacion.requestFocus();
+        } else {
+            try {
+                cargarinsumosporproducto();
+            } catch (SQLException ex) {
+                Logger.getLogger(FVentas.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(FVentas.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(FVentas.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(FVentas.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
 //Selecciona el dato de la tabla mediante el index y lo envia a la tabla detalle pedido
@@ -805,10 +800,6 @@ public class FVentas extends javax.swing.JFrame {
             this.tf_cantidadCotizacion.requestFocus();
         }
     }//GEN-LAST:event_tf_cantidadCotizacionKeyTyped
-
-    private void tf_filtroProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_filtroProductoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_filtroProductoActionPerformed
 
     /**
      * @param args the command line arguments

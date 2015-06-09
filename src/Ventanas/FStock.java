@@ -218,7 +218,7 @@ public class FStock extends javax.swing.JFrame {
         lb_cantidad.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lb_cantidad.setText("Cantidad");
 
-        cb_unidadmedida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kilos", "Gramos", "Litros", "Centimetros Cubicos" }));
+        cb_unidadmedida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kilos", "Gramos", "Litros", "Centimetros Cubicos", "Unidad" }));
 
         bt_guardarInsumo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/Iconos/24x24/Save.png"))); // NOI18N
         bt_guardarInsumo.setText("Guardar");

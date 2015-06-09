@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 
 /**
  *
- * @author Jazna
+ * @author Gupi
  */
 public final class Conexion_MySQL extends Conexion{
     private final String opciones;

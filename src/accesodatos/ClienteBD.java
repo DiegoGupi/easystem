@@ -63,7 +63,7 @@ public class ClienteBD {
             java.sql.SQLException {
         ArrayList<Cliente> registros = new ArrayList();
         Conexion cdb = FactoriaServicios.getInstancia().getConexionDb();
-        cdb.un_sql = "select * from cliente ";
+        cdb.un_sql = "select * from cliente";
         cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
         while (cdb.resultado.next()) {
             Cliente cl = new Cliente();

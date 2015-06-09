@@ -13,7 +13,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author Jazna
+ * @author Gupi
  */
 public class Conexion {
     public Connection conexion = null;

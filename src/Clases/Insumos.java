@@ -4,7 +4,6 @@
  */
 package Clases;
 
-import accesodatos.ClienteBD;
 import accesodatos.InsumosBD;
 import java.util.ArrayList;
 

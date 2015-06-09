@@ -1,17 +1,8 @@
-/*
- * FactoriaServicios.java
- *
- * Created on 7 de junio de 2007, 07:23 PM
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 package servicio;
 
 /**
  * Permite generar una instancia del servicio a base de datos
- * @author Yasna Meza Hidalgo
+ * @author Gupi
  */
 public class FactoriaServicios {
 

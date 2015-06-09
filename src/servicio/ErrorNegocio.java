@@ -6,7 +6,7 @@ package servicio;
 
 /**
  *
- * @author Nanami
+ * @author Gupi
  */
 public class ErrorNegocio extends Exception {
 

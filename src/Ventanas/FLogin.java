@@ -5,6 +5,14 @@
  */
 package Ventanas;
 
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import servicio.Conexion;
+import servicio.FactoriaServicios;
+
 /**
  *
  * @author DiegoAndrés
@@ -16,6 +24,8 @@ public class FLogin extends javax.swing.JFrame {
      */
     public FLogin() {
         initComponents();
+        this.setLocation(350, 300);
+        txt_usuario.requestFocus();
     }
 
     /**
@@ -27,26 +37,36 @@ public class FLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        txt_usuario = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        txt_contra = new javax.swing.JPasswordField();
+        btn_login = new javax.swing.JButton();
+        btn_chau = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.setToolTipText("Ingrese Nombre de usuario de acceso a Easystem");
+        txt_usuario.setToolTipText("Ingrese Nombre de usuario de acceso a Easystem");
 
         jLabel1.setText("Usuario");
 
         jLabel2.setText("Password");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/Iconos/24x24/Apply.png"))); // NOI18N
-        jButton1.setText("Acceso");
+        btn_login.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/Iconos/24x24/Apply.png"))); // NOI18N
+        btn_login.setText("Acceso");
+        btn_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loginActionPerformed(evt);
+            }
+        });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/Iconos/24x24/Abort.png"))); // NOI18N
-        jButton2.setText("Salir");
+        btn_chau.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/Iconos/24x24/Abort.png"))); // NOI18N
+        btn_chau.setText("Salir");
+        btn_chau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_chauActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,39 +79,61 @@ public class FLogin extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(105, 105, 105)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jPasswordField1))))
+                                .addComponent(txt_contra))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(85, 85, 85)
+                                .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_chau, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(28, 28, 28)
-                        .addComponent(jTextField1)))
-                .addGap(56, 56, 56))
+                        .addComponent(txt_usuario)))
+                .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_contra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btn_login)
+                    .addComponent(btn_chau))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
+        // TODO add your handling code here:
+        String usu = txt_usuario.getText();
+        String pas = new String(txt_contra.getPassword());
+        try {
+            acceder(usu, pas);
+        } catch (ParseException ex) {
+            Logger.getLogger(FLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(FLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(FLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_loginActionPerformed
+
+    private void btn_chauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_chauActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btn_chauActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,12 +170,46 @@ public class FLogin extends javax.swing.JFrame {
         });
     }
 
+    void acceder(String usuario, String pass) throws ParseException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+        String cap = "";
+
+        try {
+            Conexion cdb = FactoriaServicios.getInstancia().getConexionDb();
+            cdb.un_sql = "SELECT * FROM usuario WHERE nombre_usuario='" + usuario + "' && contrasena_usuario='" + pass + "'";
+            cdb.resultado = cdb.un_st.executeQuery(cdb.un_sql);
+
+            while (cdb.resultado.next()) {
+                cap = cdb.resultado.getString("tipousuario");
+            }
+            if (cap.equals("Administrador")) {
+                this.setVisible(false);
+                FMenu ingreso = new FMenu();
+                ingreso.setVisible(true);
+                ingreso.pack();
+
+            }
+            if (cap.equals("Invitado")) {
+                this.setVisible(false);
+                FMenu mi_ventana = FMenu.getInstancia();
+                mi_ventana.setVisible(true);
+
+            }
+            if ((!cap.equals("Administrador")) && (!cap.equals("Invitado"))) {
+                JOptionPane.showMessageDialog(this, "No existe sus datos");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btn_chau;
+    private javax.swing.JButton btn_login;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField txt_contra;
+    private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 }

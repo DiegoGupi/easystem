@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 
-
-
 /**
  *
  * @author Nigga
@@ -24,10 +22,8 @@ public class FAbono extends javax.swing.JFrame {
      * Creates new form FAbono
      */
     private static FAbono instancia;
-     private DefaultTableModel dtm;
+    private DefaultTableModel dtm;
     private static final String[] nombreColumnas = {"NOMBRE", "DIRECCION", "TELEFONO", "MAIL", "DEUDA"};
-
-    
 
     public FAbono() {
         /*      try {
@@ -37,6 +33,7 @@ public class FAbono extends javax.swing.JFrame {
          }*/
         initComponents();
         cargarTabla();
+        this.setLocationRelativeTo(null);
     }
 
     public static FAbono getInstancia() {
@@ -46,6 +43,7 @@ public class FAbono extends javax.swing.JFrame {
         return instancia;
 
     }
+
     private void cargarTabla() {
         ArrayList<Cliente> r;
         Iterator<Cliente> iterador;
@@ -303,7 +301,7 @@ public class FAbono extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
