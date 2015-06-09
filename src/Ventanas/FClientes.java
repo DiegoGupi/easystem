@@ -5,11 +5,11 @@
 package Ventanas;
 
 import Clases.Cliente;
+import Clases.FixedSizeDocument;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -21,6 +21,7 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.JTextField;
 
 /**
  *
@@ -34,6 +35,7 @@ public class FClientes extends javax.swing.JFrame {
     private static FClientes instancia;
     private DefaultTableModel dtm;
     final Cliente cl;
+
     private static final String[] nombreColumnas = {"RUT ", "NOMBRE ", "DIRECCION", "EMPRESA", "TELEFONO", "MAIL", "TIPO"};
 
     private FClientes() {
@@ -42,12 +44,14 @@ public class FClientes extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.cl = new Cliente();
         this.tf_rutCliente.setEnabled(false);
+        tf_rutCliente.setDocument(new FixedSizeDocument(9));
         this.tf_nombreCliente.setEnabled(false);
         this.tf_direccionCliente.setEnabled(false);
         this.tf_empresaCliente.setEnabled(false);
         this.tf_telefonoCliente.setEnabled(false);
+        tf_rutCliente.setDocument(new FixedSizeDocument(15));
         this.tf_mail.setEnabled(false);
-        this.bt_añadir.setEnabled(true);
+        this.bt_anadir.setEnabled(true);
         this.bt_guardarNuevoCliente.setEnabled(false);
         cargarTabla();
 
@@ -165,7 +169,6 @@ public class FClientes extends javax.swing.JFrame {
         this.tf_mail.setText("");
     }
 
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -197,7 +200,7 @@ public class FClientes extends javax.swing.JFrame {
         tf_mail = new javax.swing.JTextField();
         tf_direccionCliente = new javax.swing.JTextField();
         bt_guardarNuevoCliente = new javax.swing.JButton();
-        bt_añadir = new javax.swing.JButton();
+        bt_anadir = new javax.swing.JButton();
         bt_cancelar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         cb_tipocliente = new javax.swing.JComboBox();
@@ -338,11 +341,11 @@ public class FClientes extends javax.swing.JFrame {
             }
         });
 
-        bt_añadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/Iconos/24x24/User group.png"))); // NOI18N
-        bt_añadir.setText("Añadir");
-        bt_añadir.addActionListener(new java.awt.event.ActionListener() {
+        bt_anadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventanas/Iconos/24x24/User group.png"))); // NOI18N
+        bt_anadir.setText("Añadir");
+        bt_anadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_añadirActionPerformed(evt);
+                bt_anadirActionPerformed(evt);
             }
         });
 
@@ -378,7 +381,7 @@ public class FClientes extends javax.swing.JFrame {
                             .addComponent(tf_nombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(bt_añadir)
+                        .addComponent(bt_anadir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bt_guardarNuevoCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -437,7 +440,7 @@ public class FClientes extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(bt_guardarNuevoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(bt_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(bt_añadir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(bt_anadir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -552,13 +555,7 @@ public class FClientes extends javax.swing.JFrame {
             this.cl.cargar();
             this.cargarTabla();
 
-        } catch (java.lang.ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Descripcion : " + e.getMessage());
-        } catch (java.lang.IllegalAccessException e) {
-            JOptionPane.showMessageDialog(null, "Descripcion : " + e.getMessage());
-        } catch (java.lang.InstantiationException e) {
-            JOptionPane.showMessageDialog(null, "Descripcion : " + e.getMessage());
-        } catch (java.sql.SQLException e) {
+        } catch (java.lang.ClassNotFoundException | java.lang.IllegalAccessException | java.lang.InstantiationException | java.sql.SQLException e) {
             JOptionPane.showMessageDialog(null, "Descripcion : " + e.getMessage());
         }
     }//GEN-LAST:event_formWindowActivated
@@ -616,7 +613,7 @@ public class FClientes extends javax.swing.JFrame {
         this.tf_mail.setEnabled(false);
     }//GEN-LAST:event_bt_cancelarActionPerformed
 
-    private void bt_añadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_añadirActionPerformed
+    private void bt_anadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_anadirActionPerformed
         this.tf_rutCliente.setEnabled(true);
         this.tf_nombreCliente.setEnabled(true);
         this.tf_direccionCliente.setEnabled(true);
@@ -626,10 +623,11 @@ public class FClientes extends javax.swing.JFrame {
         this.bt_guardarNuevoCliente.setEnabled(true);
         limpiar();
 
-    }//GEN-LAST:event_bt_añadirActionPerformed
+    }//GEN-LAST:event_bt_anadirActionPerformed
 
     private void bt_guardarNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarNuevoClienteActionPerformed
 
+        System.out.println(formatear(this.tf_rutCliente.getText()));
         String email = this.tf_mail.getText();
         String regEx = "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b";
 
@@ -637,7 +635,7 @@ public class FClientes extends javax.swing.JFrame {
         Matcher m = p.matcher(email);
 
         if (m.find()) {
-            this.cl.setRutCliente(formatear(this.tf_rutCliente.getText()));
+            this.cl.setRutCliente(this.tf_rutCliente.getText());
             this.cl.setNombreCliente(this.tf_nombreCliente.getText());
             this.cl.setDireccionCliente(this.tf_direccionCliente.getText());
             this.cl.setEmpresaCliente(this.tf_empresaCliente.getText());
@@ -767,7 +765,7 @@ public class FClientes extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_abonar;
-    private javax.swing.JButton bt_añadir;
+    private javax.swing.JButton bt_anadir;
     private javax.swing.JButton bt_cancelar;
     private javax.swing.JButton bt_guardarNuevoCliente;
     private javax.swing.JButton btn_volver;
