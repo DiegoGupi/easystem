@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.JTextField;
+import servicio.MyError;
 
 /**
  *
@@ -626,7 +627,14 @@ public class FClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_anadirActionPerformed
 
     private void bt_guardarNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarNuevoClienteActionPerformed
-
+        try {
+        if(this.tf_rutCliente.getText().length() == 0) throw new MyError(1,"Debe ingresar datos en el Cuadro de RUT");
+        if(this.tf_nombreCliente.getText().length() ==0) throw new MyError(2,"Debe ingresar datos en el cuadro NOMBRE ");
+        if(this.tf_direccionCliente.getText().length() ==0) throw new MyError(3,"Debe ingresar datos en el cuadro DIRECCION ");
+        if(this.tf_empresaCliente.getText().length() ==0) throw new MyError(3,"Debe ingresar datos en el cuadro EMPRESA ");
+        if(this.tf_telefonoCliente.getText().length() ==0) throw new MyError(3,"Debe ingresar datos en el cuadro TELEFONO ");
+        
+        
         System.out.println(formatear(this.tf_rutCliente.getText()));
         String email = this.tf_mail.getText();
         String regEx = "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b";
@@ -669,6 +677,8 @@ public class FClientes extends javax.swing.JFrame {
         }
 
         cargarTabla();
+        
+        }catch (MyError e) { JOptionPane.showMessageDialog(null, e.getMensaje());}
 
     }//GEN-LAST:event_bt_guardarNuevoClienteActionPerformed
 
