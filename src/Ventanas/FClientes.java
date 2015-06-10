@@ -49,7 +49,7 @@ public class FClientes extends javax.swing.JFrame {
         this.tf_direccionCliente.setEnabled(false);
         this.tf_empresaCliente.setEnabled(false);
         this.tf_telefonoCliente.setEnabled(false);
-        tf_rutCliente.setDocument(new FixedSizeDocument(15));
+        tf_telefonoCliente.setDocument(new FixedSizeDocument(15));
         this.tf_mail.setEnabled(false);
         this.bt_anadir.setEnabled(true);
         this.bt_guardarNuevoCliente.setEnabled(false);

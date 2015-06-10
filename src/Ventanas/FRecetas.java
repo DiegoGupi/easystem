@@ -6,6 +6,8 @@ package Ventanas;
 
 import Clases.Insumos;
 import Clases.Producto;
+import Clases.Receta;
+import Clases.Recetadetalle;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -35,9 +38,11 @@ public class FRecetas extends javax.swing.JFrame {
     private DefaultTableModel dmt;
 
     Producto pr;
+    Receta rc;
     String data[][] = {};
     String nombreColumnas[] = {"INSUMO ", "CANTIDAD"};
     private Map carrito_compra = new HashMap();
+    private final static String newline = "\n";
 
     public FRecetas() {
         try {
@@ -46,12 +51,14 @@ public class FRecetas extends javax.swing.JFrame {
         }
         initComponents();
         this.pr = new Producto();
+        this.rc = new Receta();
         cargacomboproductos();
         cargarComboInsumos();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.dispose();
         dmt = new DefaultTableModel(data, nombreColumnas);
+
     }
 
     public static FRecetas getInstancia() {
@@ -150,6 +157,17 @@ public class FRecetas extends javax.swing.JFrame {
 
     }
 
+    public DefaultComboBoxModel ListaProductos(Map carrito_compra) {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        Iterator it = carrito_compra.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry e = (Map.Entry) it.next();
+            Recetadetalle itm = (Recetadetalle) e.getValue();
+            model.addElement(itm.getnombreinsumo() + " | " + itm.getCantidad());
+        }
+        return model;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -169,10 +187,12 @@ public class FRecetas extends javax.swing.JFrame {
         btn_pasar = new javax.swing.JButton();
         cb_insumos = new javax.swing.JComboBox();
         btn_tostock = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jt_insumos = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         tf_precio = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tx_detalle = new javax.swing.JTextArea();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtinsumosporproducto = new javax.swing.JTable();
@@ -234,23 +254,18 @@ public class FRecetas extends javax.swing.JFrame {
             }
         });
 
-        jt_insumos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(jt_insumos);
-
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Precio Unitario");
 
         tf_precio.setToolTipText("Precio unitario del producto a generar");
+
+        tx_detalle.setColumns(20);
+        tx_detalle.setRows(5);
+        jScrollPane3.setViewportView(tx_detalle);
+
+        jLabel5.setText("CANTIDAD");
+
+        jLabel8.setText("INSUMO");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -260,41 +275,49 @@ public class FRecetas extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btn_pasar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bt_guardarReceta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 7, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(cb_insumos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_cantidad)))
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_tostock)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel11)
                             .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf_nuevoProducto)
-                            .addComponent(tf_precio))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tf_precio)
+                                .addGap(2, 2, 2))
+                            .addComponent(tf_nuevoProducto)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cb_insumos, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_tostock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_pasar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bt_guardarReceta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel8)
+                                .addGap(56, 56, 56)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(tf_nuevoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -308,16 +331,18 @@ public class FRecetas extends javax.swing.JFrame {
                     .addComponent(cb_insumos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_tostock, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tf_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tf_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_pasar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bt_guardarReceta)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bt_guardarReceta))
+                    .addComponent(btn_pasar))
                 .addGap(5, 5, 5))
         );
 
@@ -407,9 +432,9 @@ public class FRecetas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addGap(276, 276, 276)
-                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlabel_fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                .addComponent(jlabel_fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                 .addGap(2, 2, 2)
                 .addComponent(jLabel14)
                 .addGap(18, 18, 18)
@@ -503,47 +528,12 @@ public class FRecetas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_pasarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pasarActionPerformed
-        String insumo = cb_insumos.getSelectedItem().toString();
-        String cantidad = tf_cantidad.getText();
-        Insumos i = new Insumos();
-        String umedida = i.getMedidaInsumo();
-        String datos[] = {insumo, cantidad};
-        dmt.addRow(datos);
-        jt_insumos.setModel(dmt);
-    }//GEN-LAST:event_btn_pasarActionPerformed
-
-    private void bt_guardarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarRecetaActionPerformed
-        this.pr.setNombreProducto(this.tf_nuevoProducto.getText());
-        this.pr.setPrecioProducto(Integer.parseInt(this.tf_precio.getText()));
-        this.pr.setEstadoproducto(true);
-
-        try {
-            this.pr.grabar();
-            JOptionPane.showMessageDialog(null, "Registro guardado con exito");
-            limpiar();
-            cargacomboproductos();
-            cargacomboinsumos();
-            jt_insumos.clearSelection();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
-            Logger.getLogger(FRecetas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_bt_guardarRecetaActionPerformed
-
-    private void btn_tostockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tostockActionPerformed
-        FStock mi_ventana = FStock.getInstancia();
-        mi_ventana.setVisible(true);
-    }//GEN-LAST:event_btn_tostockActionPerformed
-
     private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
         this.dispose();
     }//GEN-LAST:event_btn_volverActionPerformed
 
-    private void cb_insumosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cb_insumosFocusGained
-        cargarComboInsumos();
-    }//GEN-LAST:event_cb_insumosFocusGained
-
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+
 //        final TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(dmt);
 //        cb_producto.setRowSorter(sorter);
 //        String text = cb_producto.getSelectedItem().toString();
@@ -553,6 +543,53 @@ public class FRecetas extends javax.swing.JFrame {
 //            sorter.setRowFilter(RowFilter.regexFilter(text));
 //        }
     }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void btn_tostockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tostockActionPerformed
+        FStock mi_ventana = FStock.getInstancia();
+        mi_ventana.setVisible(true);
+    }//GEN-LAST:event_btn_tostockActionPerformed
+
+    private void cb_insumosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cb_insumosFocusGained
+        cargarComboInsumos();
+    }//GEN-LAST:event_cb_insumosFocusGained
+
+    private void btn_pasarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pasarActionPerformed
+
+        tx_detalle.append("        " + this.tf_cantidad.getText() + "                                        " + this.cb_insumos.getSelectedItem().toString() + newline);
+
+//        String insumo = cb_insumos.getSelectedItem().toString();
+//        String cantidad = tf_cantidad.getText();
+//        Insumos i = new Insumos();
+//        String umedida = i.getMedidaInsumo();
+//        String datos[] = {insumo, cantidad};
+//        dmt.addRow(datos);
+//        jt_insumos.setModel(dmt);
+    }//GEN-LAST:event_btn_pasarActionPerformed
+
+    private void bt_guardarRecetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_guardarRecetaActionPerformed
+        if (this.tf_precio == null || this.tf_nuevoProducto == null) {
+            JOptionPane.showMessageDialog(null, "Falta precio o nombre del producto");
+            tf_cantidad.requestFocus();
+        } else {
+
+            this.pr.setNombreProducto(this.tf_nuevoProducto.getText());
+            this.pr.setPrecioProducto(Integer.parseInt(this.tf_precio.getText()));
+            this.pr.setEstadoproducto(true);
+            this.rc.setDetalleReceta(this.tx_detalle.getText());
+
+            try {
+                this.pr.grabar();
+                this.rc.grabar();
+                JOptionPane.showMessageDialog(null, "Registro guardado con exito");
+                limpiar();
+                cargacomboproductos();
+                cargacomboinsumos();
+                tx_detalle.setText(newline);
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+                Logger.getLogger(FRecetas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_bt_guardarRecetaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -586,21 +623,23 @@ public class FRecetas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jlabel_fecha;
     private javax.swing.JLabel jlabel_fecha2;
-    private javax.swing.JTable jt_insumos;
     private javax.swing.JTable jtinsumosporproducto;
     private javax.swing.JTextField tf_cantidad;
     private javax.swing.JTextField tf_nuevoProducto;
     private javax.swing.JTextField tf_precio;
+    private javax.swing.JTextArea tx_detalle;
     // End of variables declaration//GEN-END:variables
 }

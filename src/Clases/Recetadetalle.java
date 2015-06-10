@@ -9,7 +9,7 @@ package Clases;
  *
  * @author DiegoAndrés
  */
-public class carrito {
+public class Recetadetalle {
 
     private String nombreinsumo = "";
     private int cantidad = 0;
