@@ -61,7 +61,7 @@ public class RecetaBD {
     public ArrayList<Receta> cargar() throws java.lang.ClassNotFoundException,
             java.lang.InstantiationException,
             java.lang.IllegalAccessException,
-            //añademos la execion para cdb.resultado
+
             java.sql.SQLException {
         ArrayList<Receta> registros = new ArrayList();
         Conexion cdb = FactoriaServicios.getInstancia().getConexionDb();
